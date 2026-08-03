@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cart — Alltrip</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Alltrip</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav" id="main-nav">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Catalog</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="mailto:youremail@example.com">Contact</a>
+        <a href="cart.html" class="cart-link">
+          Cart <span class="cart-badge" id="cart-count">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top:32px;">
+    <h2 class="section-title" style="margin-top:0;">Your Cart</h2>
+    <div id="cart-content"></div>
+  </main>
+
+  <footer>
+    &copy; <span id="year"></span> Alltrip. All rights reserved.
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/nav.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function renderCart() {
+      const container = document.getElementById("cart-content");
+      const items = getCartItems();
+
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <p>Your cart is empty.</p>
+            <a href="index.html" class="btn btn-secondary">Browse products</a>
+          </div>`;
+        return;
+      }
+
+      const rows = items
+        .map(
+          (item) => `
+        <div class="cart-item">
+          <div class="cart-item-image" style="background:${item.color}">${productImageInnerHtml(item)}</div>
+          <div class="cart-item-info">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-price">${STORE_CONFIG.currencySymbol}${item.price.toFixed(2)} each</div>
+            <button class="remove-link" data-remove="${item.key}">Remove</button>
+          </div>
+          <div class="qty-control">
+            <button data-decrease="${item.key}">−</button>
+            <span>${item.qty}</span>
+            <button data-increase="${item.key}">+</button>
+          </div>
+          <div class="cart-item-total">
+            ${STORE_CONFIG.currencySymbol}${(item.price * item.qty).toFixed(2)}
+          </div>
+        </div>`
+        )
+        .join("");
+
+      const total = getCartTotal();
+
+      container.innerHTML = `
+        ${rows}
+        <div class="cart-summary">
+          <div class="summary-row summary-total">
+            <span>Total</span>
+            <span>${STORE_CONFIG.currencySymbol}${total.toFixed(2)}</span>
+          </div>
+          <a href="checkout.html" class="btn btn-primary" style="display:block; text-align:center; text-decoration:none; margin-top:16px;">
+            Proceed to checkout
+          </a>
+        </div>`;
+
+      container.querySelectorAll("[data-increase]").forEach((btn) =>
+        btn.addEventListener("click", () => {
+          const key = btn.dataset.increase;
+          const current = getCartItems().find((i) => i.key === key).qty;
+          setQuantity(key, current + 1);
+          renderCart();
+        })
+      );
+
+      container.querySelectorAll("[data-decrease]").forEach((btn) =>
+        btn.addEventListener("click", () => {
+          const key = btn.dataset.decrease;
+          const current = getCartItems().find((i) => i.key === key).qty;
+          setQuantity(key, current - 1);
+          renderCart();
+        })
+      );
+
+      container.querySelectorAll("[data-remove]").forEach((btn) =>
+        btn.addEventListener("click", () => {
+          removeFromCart(btn.dataset.remove);
+          renderCart();
+        })
+      );
+    }
+
+    renderCart();
+  </script>
+</body>
+</html>

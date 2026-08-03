@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Checkout — Alltrip</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Alltrip</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav" id="main-nav">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Catalog</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="mailto:youremail@example.com">Contact</a>
+        <a href="cart.html" class="cart-link">
+          Cart <span class="cart-badge" id="cart-count">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2 class="section-title" style="margin-bottom:0;">Checkout</h2>
+    <div id="checkout-content"></div>
+  </main>
+
+  <footer>
+    &copy; <span id="year"></span> Alltrip. All rights reserved.
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/nav.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function qrImageUrl(data, size = 220) {
+      // Generated on the fly by a public QR image API — no data is stored,
+      // the address/amount is only encoded into the requested image.
+      return `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(data)}`;
+    }
+
+    function makeOrderId() {
+      return "ALT-" + Date.now().toString(36).toUpperCase();
+    }
+
+    function renderCheckout() {
+      const container = document.getElementById("checkout-content");
+      const items = getCartItems();
+
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <p>Your cart is empty.</p>
+            <a href="index.html" class="btn btn-secondary">Browse products</a>
+          </div>`;
+        return;
+      }
+
+      const total = getCartTotal();
+      const summaryRows = items
+        .map(
+          (i) => `
+        <div class="summary-row">
+          <span>${i.name} × ${i.qty}</span>
+          <span>${STORE_CONFIG.currencySymbol}${(i.price * i.qty).toFixed(2)}</span>
+        </div>`
+        )
+        .join("");
+
+      container.innerHTML = `
+        <div class="checkout-layout">
+          <div>
+            <div class="payment-tabs">
+              ${STORE_CONFIG.crypto.enabled ? `<button class="payment-tab active" data-tab="crypto">Pay with Crypto</button>` : ""}
+              ${STORE_CONFIG.giftCard.enabled ? `<button class="payment-tab" data-tab="giftcard">Gift Card</button>` : ""}
+            </div>
+
+            <div class="payment-panel" id="panel-crypto">
+              <p class="note">Send exactly <strong>${STORE_CONFIG.currencySymbol}${total.toFixed(2)}</strong> worth of <strong>${STORE_CONFIG.crypto.network}</strong> to the address below, then click "I've sent payment".</p>
+              <div class="qr-box">
+                <img src="${qrImageUrl(STORE_CONFIG.crypto.address)}" width="220" height="220" alt="Crypto address QR code" />
+              </div>
+              <div class="address-box">
+                <span id="crypto-address">${STORE_CONFIG.crypto.address}</span>
+                <button class="copy-btn" id="copy-address">Copy</button>
+              </div>
+              <button class="btn-primary" style="margin-top:20px;" id="confirm-crypto">I've sent payment</button>
+            </div>
+
+            <div class="payment-panel hidden" id="panel-giftcard">
+              <div class="field">
+                <label for="giftcard-code">Gift card code</label>
+                <input type="text" id="giftcard-code" placeholder="e.g. ALLTRIP10" />
+              </div>
+              <p class="note" id="giftcard-message"></p>
+              <button class="btn-primary" id="confirm-giftcard">Place order with gift card</button>
+            </div>
+          </div>
+
+          <div class="payment-panel">
+            <h3 style="margin-top:0;">Order summary</h3>
+            ${summaryRows}
+            <div class="cart-summary">
+              <div class="summary-row summary-total">
+                <span>Total</span>
+                <span>${STORE_CONFIG.currencySymbol}${total.toFixed(2)}</span>
+              </div>
+            </div>
+          </div>
+        </div>`;
+
+      // Tab switching
+      container.querySelectorAll(".payment-tab").forEach((tab) => {
+        tab.addEventListener("click", () => {
+          container.querySelectorAll(".payment-tab").forEach((t) => t.classList.remove("active"));
+          tab.classList.add("active");
+          container.querySelectorAll(".payment-panel").forEach((p) => {
+            if (p.id === "panel-crypto" || p.id === "panel-giftcard") p.classList.add("hidden");
+          });
+          document.getElementById(`panel-${tab.dataset.tab}`).classList.remove("hidden");
+        });
+      });
+
+      // Copy address
+      const copyBtn = document.getElementById("copy-address");
+      if (copyBtn) {
+        copyBtn.addEventListener("click", () => {
+          navigator.clipboard.writeText(STORE_CONFIG.crypto.address);
+          copyBtn.textContent = "Copied!";
+          setTimeout(() => (copyBtn.textContent = "Copy"), 1200);
+        });
+      }
+
+      // Confirm crypto payment
+      const confirmCrypto = document.getElementById("confirm-crypto");
+      if (confirmCrypto) {
+        confirmCrypto.addEventListener("click", () => showConfirmation("Crypto"));
+      }
+
+      // Gift card apply / confirm
+      const confirmGiftcard = document.getElementById("confirm-giftcard");
+      if (confirmGiftcard) {
+        confirmGiftcard.addEventListener("click", () => {
+          const codeInput = document.getElementById("giftcard-code");
+          const message = document.getElementById("giftcard-message");
+          const code = codeInput.value.trim().toUpperCase();
+
+          if (!code) {
+            message.textContent = "Enter a gift card code to continue.";
+            message.style.color = "#b23b3b";
+            return;
+          }
+
+          showConfirmation("Gift Card", code);
+        });
+      }
+    }
+
+    function showConfirmation(method, giftCardCode) {
+      const orderId = makeOrderId();
+      const total = getCartTotal();
+      const container = document.getElementById("checkout-content");
+
+      const instructions =
+        method === "Crypto"
+          ? `Please email your transaction ID / hash to <strong>${STORE_CONFIG.contactEmail}</strong> along with your order number so we can confirm payment and ship your order.`
+          : `Please email your gift card code (<strong>${giftCardCode}</strong>) to <strong>${STORE_CONFIG.contactEmail}</strong> along with your order number so we can verify it and ship your order.`;
+
+      container.innerHTML = `
+        <div class="order-confirm">
+          <h3>Thanks! Your order has been placed.</h3>
+          <div class="order-id">${orderId}</div>
+          <p class="note">Payment method: <strong>${method}</strong> · Total: <strong>${STORE_CONFIG.currencySymbol}${total.toFixed(2)}</strong></p>
+          <p class="note">${instructions}</p>
+          <a href="index.html" class="btn btn-secondary" style="text-decoration:none; margin-top:16px; display:inline-block;">Back to shop</a>
+        </div>`;
+
+      clearCart();
+    }
+
+    renderCheckout();
+  </script>
+</body>
+</html>

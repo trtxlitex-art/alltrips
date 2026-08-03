@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catalog — Alltrip</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="promo-bar">
+    <div class="promo-track" id="promo-track"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Alltrip</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav" id="main-nav">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Catalog</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="mailto:youremail@example.com">Contact</a>
+        <a href="cart.html" class="cart-link">
+          Cart <span class="cart-badge" id="cart-count">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container shop-layout">
+    <button class="btn btn-secondary sidebar-toggle" id="sidebar-toggle">Filters</button>
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-block">
+        <h4>Category</h4>
+        <div id="category-filters"></div>
+      </div>
+      <div class="sidebar-block">
+        <h4>Price</h4>
+        <div class="price-range">
+          <input type="number" id="price-min" placeholder="Min" min="0" />
+         
+          <input type="number" id="price-max" placeholder="Max" min="0" />
+        </div>
+      </div>
+      <div class="sidebar-block">
+        <h4>Sort by</h4>
+        <select id="sort-select">
+          <option value="featured">Featured</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="rating">Top Rated</option>
+        </select>
+      </div>
+      <button class="btn btn-secondary" id="reset-filters" style="width:100%;">Reset filters</button>
+    </aside>
+
+    <div class="shop-main">
+      <h2 class="section-title" style="margin-top:0;">Catalog</h2>
+      <div class="product-grid" id="product-grid"></div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; <span id="year"></span> Alltrip. All rights reserved.
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/nav.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("promo-track").innerHTML =
+      `<span>${STORE_CONFIG.announcement}</span>`.repeat(4);
+
+    document.getElementById("sidebar-toggle").addEventListener("click", () => {
+      document.getElementById("sidebar").classList.toggle("open");
+    });
+
+    const grid = document.getElementById("product-grid");
+    const categories = [...new Set(PRODUCTS.map((p) => p.category))];
+    const categoryFiltersEl = document.getElementById("category-filters");
+    const priceMinEl = document.getElementById("price-min");
+    const priceMaxEl = document.getElementById("price-max");
+    const sortSelect = document.getElementById("sort-select");
+
+    categoryFiltersEl.innerHTML = categories
+      .map(
+        (c) => `
+        <label class="checkbox-row">
+          <input type="checkbox" value="${c}" checked class="cat-checkbox" />
+          ${c}
+        </label>`
+      )
+      .join("");
+
+    function applyFilters() {
+      const checked = [...categoryFiltersEl.querySelectorAll(".cat-checkbox:checked")].map((c) => c.value);
+      const min = parseFloat(priceMinEl.value) || 0;
+      const max = parseFloat(priceMaxEl.value) || Infinity;
+
+      let results = PRODUCTS.filter(
+        (p) => checked.includes(p.category) && p.price >= min && p.price <= max
+      );
+
+      switch (sortSelect.value) {
+        case "price-asc":
+          results.sort((a, b) => a.price - b.price);
+          break;
+        case "price-desc":
+          results.sort((a, b) => b.price - a.price);
+          break;
+        case "rating":
+          results.sort((a, b) => b.rating.value - a.rating.value);
+          break;
+      }
+
+      renderProductGrid(grid, results);
+    }
+
+    categoryFiltersEl.addEventListener("change", applyFilters);
+    priceMinEl.addEventListener("input", applyFilters);
+    priceMaxEl.addEventListener("input", applyFilters);
+    sortSelect.addEventListener("change", applyFilters);
+
+    document.getElementById("reset-filters").addEventListener("click", () => {
+      categoryFiltersEl.querySelectorAll(".cat-checkbox").forEach((c) => (c.checked = true));
+      priceMinEl.value = "";
+      priceMaxEl.value = "";
+      sortSelect.value = "featured";
+      applyFilters();
+    });
+
+    applyFilters();
+  </script>
+</body>
+</html>

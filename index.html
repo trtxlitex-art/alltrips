@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alltrip</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="promo-bar">
+    <div class="promo-track" id="promo-track"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Alltrip</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav" id="main-nav">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Catalog</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="mailto:youremail@example.com">Contact</a>
+        <a href="cart.html" class="cart-link">
+          Cart <span class="cart-badge" id="cart-count">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-wordmark">ALLTRIP</div>
+    <div class="hero-content">
+      <span class="hero-badge">Official Store</span>
+      <h1>Alltrip</h1>
+      <p id="hero-tagline"></p>
+      <a href="shop.html" class="btn btn-hero">Shop now</a>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="pinned-card" id="pinned-card"></div>
+
+    <h2 class="section-title" id="products-heading">Products</h2>
+    <div class="filter-tabs" id="filter-tabs"></div>
+    <div class="product-grid" id="product-grid"></div>
+  </div>
+
+  <section class="testimonials-section">
+    <h2 class="section-title" style="text-align:center;">Loved by Customers</h2>
+    <div class="testimonials-track" id="testimonials-track"></div>
+    <p class="testimonials-footnote">500+ happy customers</p>
+  </section>
+
+  <section class="faq-section container" id="faq">
+    <p class="faq-eyebrow">Questions?</p>
+    <h2 class="section-title" style="text-align:center; margin-top:0;">FAQ</h2>
+    <div class="faq-list" id="faq-list"></div>
+  </section>
+
+  <section class="newsletter">
+    <h3>Join our email list</h3>
+    <p>Get shipping updates and new product announcements.</p>
+    <form id="newsletter-form" class="newsletter-form">
+      <input type="email" placeholder="Email address" required />
+      <button type="submit">→</button>
+    </form>
+    <p class="note" id="newsletter-message"></p>
+  </section>
+
+  <footer>
+    &copy; <span id="year"></span> Alltrip. All rights reserved.
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/nav.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("hero-tagline").textContent = STORE_CONFIG.tagline;
+
+    // Promo bar (repeated for a seamless scrolling loop)
+    document.getElementById("promo-track").innerHTML =
+      `<span>${STORE_CONFIG.announcement}</span>`.repeat(4);
+
+    // Pinned support card
+    document.getElementById("pinned-card").innerHTML = `
+      <div class="pinned-card-header">
+        <div class="pinned-avatar">A</div>
+        <div>
+          <div class="pinned-title">${STORE_CONFIG.pinnedNote.title} <span class="verified">✓</span></div>
+          <div class="pinned-sub">${STORE_CONFIG.contactEmail} · Pinned</div>
+        </div>
+      </div>
+      <p class="pinned-body">${STORE_CONFIG.pinnedNote.body}</p>`;
+
+    // Category tabs + product grid
+    const categories = ["All", ...new Set(PRODUCTS.map((p) => p.category))];
+    const grid = document.getElementById("product-grid");
+    const tabsEl = document.getElementById("filter-tabs");
+
+    function renderTabs(active) {
+      tabsEl.innerHTML = categories
+        .map((c) => `<button class="filter-tab ${c === active ? "active" : ""}" data-cat="${c}">${c}</button>`)
+        .join("");
+      tabsEl.querySelectorAll("[data-cat]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const cat = btn.dataset.cat;
+          renderTabs(cat);
+          renderProductGrid(grid, cat === "All" ? PRODUCTS : PRODUCTS.filter((p) => p.category === cat));
+        });
+      });
+    }
+
+    renderTabs("All");
+    renderProductGrid(grid, PRODUCTS);
+
+    // Testimonials
+    document.getElementById("testimonials-track").innerHTML = STORE_CONFIG.testimonials
+      .map(
+        (t) => `
+        <div class="testimonial-card">
+          <div class="testimonial-head">
+            <span class="flag">${t.flag}</span>
+            <strong>${t.initials}</strong>
+            <span class="verified">✓</span>
+          </div>
+          <div class="testimonial-date">${t.date}</div>
+          <div class="stars">${"★".repeat(t.rating)}</div>
+          <p>${t.text}</p>
+        </div>`
+      )
+      .join("");
+
+    // FAQ accordion
+    document.getElementById("faq-list").innerHTML = STORE_CONFIG.faqs
+      .map(
+        (f) => `
+        <details class="faq-item">
+          <summary>${f.q}<span class="faq-icon">+</span></summary>
+          <p>${f.a}</p>
+        </details>`
+      )
+      .join("");
+
+    // Newsletter (frontend only — no backend to send this to)
+    document.getElementById("newsletter-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      document.getElementById("newsletter-message").textContent = "Thanks for subscribing!";
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
