@@ -180,7 +180,7 @@ const PRODUCTS = [
     description: "smoke.",
     variants: [
       { id: "10000", label: "1g", price: 15.0, default: true },
-        { id: "15100", label: "3.5g", price: 30.0, default: true },
+        { id: "15100", label: "3.5g", price: 50.0, default: true },
        ],
   },
   {
