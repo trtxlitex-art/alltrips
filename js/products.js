@@ -164,7 +164,7 @@ const PRODUCTS = [
     description: "Smoke.",
     variants: [
       { id: "1450", label: "1g", price: 10.0, default: true },
-       { id: "1460", label: "3.5g", price: 30.0, },
+       { id: "1460", label: "3.5g", price: 50.0, },
        ],
   },
   {
