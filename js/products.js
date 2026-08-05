@@ -157,7 +157,7 @@ const PRODUCTS = [
     price: 30.0,
     compareAt: 35.0,
     rating: { value: 4.8, count: 142 },
-   image: "images/buzzballs.jpeg",
+   image: "images/Buzzballs.jpeg",
     color: "#1f6f5c",
     description: "Buzzballs drink.",
     variants: [
@@ -361,7 +361,7 @@ const PRODUCTS = [
     id: "Oxy",
     name: "Oxy",
     category: "Pils & Tabs",
-    price: 20.0,
+    price: 10.0,
     compareAt: 23.0,
     rating: { value: 4.7, count: 118 },
     image: "images/oxy.jpg",
@@ -408,9 +408,9 @@ const PRODUCTS = [
 
 {
     id: "Xan",
-    name: "Xan",
+    name: "Xanax",
     category: "Pils & Tabs",
-    price: 30.0,
+    price: 5.0,
     compareAt: 34.0,
     rating: { value: 4.7, count: 118 },
     image: "images/xanax.jpeg",
