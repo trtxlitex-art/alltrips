@@ -195,7 +195,8 @@ const PRODUCTS = [
     color: "#4a4a55",
     description: "Smoke",
     variants: [
-      { id: "10000", label: "Sky walker kush", price: 15.0, default: true },
+      { id: "10000", label: "1g", price: 15.0, },
+        { id: "10000", label: "3.5g", price: 50.0, },
        ],
   },
   {
@@ -360,7 +361,7 @@ const PRODUCTS = [
     variants: [
     
         { id: "1215", label: "1 ieces", price: 15.0,},
-         { id: "1235", label: "3 pieces", price: 30.0,},
+         { id: "1235", label: "3 pieces", price: 50.0,},
        ],
   },
 
@@ -378,7 +379,7 @@ const PRODUCTS = [
     variants: [
     
         { id: "1300", label: "1g", price: 15.0,},
-         { id: "1400", label: "3.5g", price: 30.0,},
+         { id: "1400", label: "3.5g", price: 50.0,},
        ],
   },
 ];
