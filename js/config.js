@@ -19,11 +19,11 @@ const STORE_CONFIG = {
   },
 
   announcement:
-    "Free shipping on orders over $50 • 30-day returns • Support: youremail@example.com",
+    "Free shipping on orders over $50 • 30-day returns • Support: alltrips.ltd@gmail.com",
 
   pinnedNote: {
-    title: "Alltrip Support",
-    body: 'Orders ship within 1–2 business days and include a tracking number by email. Questions? Reach us any time at <a href="mailto:alltrips.ltd@gmail.com">alltrips.ltd@gmail.com</a> or check the FAQ below.',
+    title: "Alltrips Support",
+    body: 'Orders to the USA, Netherlands, Germany, UK, Switzerland & Australia ship same-day and arrive within 24 hours via our local runners. Tracking is emailed on dispatch. Questions? Reach us any time at alltrips.ltd@gmail.com or check the FAQ below.<a href="mailto:alltrips.ltd@gmail.com">alltrips.ltd@gmail.com</a> or check the FAQ below.',
   },
 
   testimonials: [

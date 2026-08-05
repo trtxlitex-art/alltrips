@@ -34,8 +34,8 @@ const PRODUCTS = [
   },
 
   {
-    id: "Elbar",
-    name: " elbar ",
+    id: "Elfbar",
+    name: " elfbar ",
     category: "Smoke",
     price: 25.0,
     compareAt: 30.0,
@@ -229,21 +229,7 @@ const PRODUCTS = [
       { id: "10000", label: "Gummies", price: 30.0, default: true },
        ],
   },
-  {
-    id: "Thc yart muha - Cali clears",
-    name: "Thc yart muha - Cali clears",
-    category: "Smoke",
-    price: 30.0,
-    compareAt: 32.0,
-    rating: { value: 4.7, count: 118 },
-    image: "images/tc.jpg",
-    emoji: "🔋",
-    color: "#4a4a55",
-    description: "Smoke",
-    variants: [
-      { id: "10000", label: "1g", price: 30.0, default: true },
-       ],
-  },
+ 
   {
     id: "Cann",
     name: "Canabis",
