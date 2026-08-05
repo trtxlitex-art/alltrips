@@ -141,7 +141,7 @@ const PRODUCTS = [
     price: 80.0,
     compareAt: 96.0,
     rating: { value: 5.0, count: 86 },
-    image: "images/crystal molly.jpg",
+    image: "images/crystalmolly.jpeg",
     emoji: "🛏️",
     color: "#6b4f8a",
     description: "molly",

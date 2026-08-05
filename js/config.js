@@ -23,7 +23,7 @@ const STORE_CONFIG = {
 
   pinnedNote: {
     title: "Alltrips Support",
-    body: 'Orders to the USA, Netherlands, Germany, UK, Switzerland & Australia ship same-day and arrive within 24 hours via our local runners. Tracking is emailed on dispatch. Questions? Reach us any time at alltrips.ltd@gmail.com or check the FAQ below.<a href="mailto:alltrips.ltd@gmail.com">alltrips.ltd@gmail.com</a> or check the FAQ below.',
+    body: 'Orders to the USA, Netherlands, Germany, UK, Switzerland & Australia ship same-day and arrive within 24 hours via our local runners. Tracking is emailed on dispatch. Questions? Reach us any time at <a href="mailto:alltrips.ltd@gmail.com">alltrips.ltd@gmail.com</a> or check the FAQ below.',
   },
 
   testimonials: [
