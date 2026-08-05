@@ -159,10 +159,14 @@ const PRODUCTS = [
     rating: { value: 4.8, count: 142 },
    image: "images/buzzballs.jpeg",
     color: "#1f6f5c",
-    description: "buzzballs drink.",
+    description: "Buzzballs drink.",
     variants: [
-      { id: "compact", label: "Buzzballs ", price: 30.0, default: true },
-  
+      { id: "compact", label: "Lime 'Rita / Tequila 'Rita ", price: 30.0, default: true },
+   { id: "compact", label: "Strawberry 'Rita ", price: 30.0,  },
+    { id: "compact", label: "Choc Tease ", price: 30.0,  },
+        { id: "compact", label: "Pineapple Jalapeño ", price: 30.0,  },
+            { id: "compact", label: "Horchata ", price: 30.0,  },
+              { id: "compact", label: "Caipi Crush ", price: 30.0,  },
     ],
   },
   {
@@ -203,22 +207,7 @@ const PRODUCTS = [
 
     ],
   },
-  {
-    id: "chocolate",
-    name: "Chocolate",
-    category: "Eddies",
-    price: 30.0,
-    compareAt: 33.0,
-    rating: { value: 4.9, count: 63 },
-    image: "images/chocolte.webp",
-    emoji: "🧴",
-    color: "#3a6b6b",
-    description: "Chocolate",
-    variants: [
-      { id: "standard", label: "Standard", price: 30.0, default: true },
-      { id: "large", label: "Large", price: 50.0 },
-    ],
-  },
+ 
 
    {
     id: "Royal-chocolate",
@@ -337,17 +326,17 @@ const PRODUCTS = [
     id: "Lsd",
     name: "Lsd",
     category: "Pils & Tabs",
-    price: 15.0,
-    compareAt: 36.0,
+    price: 10.0,
+    compareAt: 16.0,
     rating: { value: 4.7, count: 118 },
     image: "images/lsdtab.jpeg",
     emoji: "🔋",
     color: "#4a4a55",
     description: "Pils & Tabs",
     variants: [
-      { id: "10000", label: "full sheet", price: 250.0, default: true },
-       { id: "10000", label: "10 pieces", price: 100.0, },
-        { id: "10000", label: "5 sheet", price: 50.0, default: true },
+      { id: "7000", label: "full sheet", price: 250.0, default: true },
+       { id: "8000", label: "10 pieces", price: 100.0, },
+        { id: "9000", label: "5 sheet", price: 50.0, default: true },
        ],
   },
 
@@ -355,8 +344,8 @@ const PRODUCTS = [
     id: "Molly/ecstacy",
     name: "Molly/ecstacy",
     category: "Pils & Tabs",
-    price: 15.0,
-    compareAt: 36.0,
+    price: 10.0,
+    compareAt: 12.0,
     rating: { value: 4.7, count: 118 },
     image: "images/mollyblue.jpeg",
     emoji: "🔋",
