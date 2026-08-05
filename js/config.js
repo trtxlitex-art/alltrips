@@ -2,13 +2,13 @@
 const STORE_CONFIG = {
   storeName: "Alltrip",
   tagline: "Gear up for your next trip",
-  contactEmail: "youremail@example.com",
+  contactEmail: "alltrips.ltd@gmail.com",
   currencySymbol: "$",
 
   crypto: {
     enabled: true,
     network: "Bitcoin (BTC)",
-    address: "bc1qxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    address: "bc1qzg7gn9jj35uvtzcmfctqn9yvjmgvh89t84pq8e",
   },
 
   giftCard: {
@@ -23,7 +23,7 @@ const STORE_CONFIG = {
 
   pinnedNote: {
     title: "Alltrip Support",
-    body: 'Orders ship within 1–2 business days and include a tracking number by email. Questions? Reach us any time at <a href="mailto:youremail@example.com">youremail@example.com</a> or check the FAQ below.',
+    body: 'Orders ship within 1–2 business days and include a tracking number by email. Questions? Reach us any time at <a href="mailto:alltrips.ltd@gmail.com">alltrips.ltd@gmail.com</a> or check the FAQ below.',
   },
 
   testimonials: [

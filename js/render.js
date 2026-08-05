@@ -14,7 +14,7 @@ function productCardHtml(p) {
         <div class="product-desc">${p.description}</div>
         <div class="product-price">
           ${p.compareAt ? `<span class="compare-price">${money(p.compareAt)}</span>` : ""}
-          From ${money(p.price)}
+          ${money(p.price)}
         </div>
         <button class="btn-primary" data-open-variants="${p.id}">Select options</button>
       </div>

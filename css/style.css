@@ -263,7 +263,12 @@ nav.main-nav a:not(.cart-link):hover::after {
   position: relative;
   padding: clamp(56px, 10vw, 100px) 24px;
   text-align: center;
-  background: #14161a;
+
+  background: linear-gradient(rgba(16, 17, 20, 0.45), rgba(16, 17, 20, 0.55)), url("../images/rttdd.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
   color: #fff;
   border-bottom: 1px solid var(--border);
   overflow: hidden;
@@ -427,6 +432,49 @@ nav.main-nav a:not(.cart-link):hover::after {
   grid-template-columns: repeat(auto-fill, minmax(min(230px, 100%), 1fr));
   gap: clamp(14px, 3vw, 24px);
   padding-bottom: 60px;
+}
+
+@media (max-width: 560px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .product-image {
+    height: 110px;
+    font-size: 36px;
+  }
+
+  .product-body {
+    padding: 10px;
+    gap: 4px;
+  }
+
+  .product-name {
+    font-size: 13px;
+  }
+
+  .product-desc {
+    font-size: 11px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+  }
+
+  .product-price {
+    font-size: 13px;
+  }
+
+  .compare-price {
+    font-size: 11px;
+  }
+
+  button, .btn {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
 }
 
 .product-card {

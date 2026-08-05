@@ -31,7 +31,7 @@ const PRODUCTS = [
     name: "Crystal meth",
     category: "Crystals",
     price: 50.0,
-    compareAt: 60.0,
+  
     rating: { value: 4.9, count: 89 },
     image: "images/meth2.jpg",
   
@@ -148,7 +148,7 @@ const PRODUCTS = [
     color: "#4a4a55",
     description: "Smoke",
     variants: [
-      { id: "10000", label: "smoke", price: 30.0, default: true },
+      { id: "10000", label: "1g", price: 30.0, default: true },
        ],
   },
   {
@@ -163,7 +163,8 @@ const PRODUCTS = [
     color: "#4a4a55",
     description: "Smoke.",
     variants: [
-      { id: "10000", label: "Smoke", price: 10.0, default: true },
+      { id: "10000", label: "1g", price: 10.0, default: true },
+       { id: "10000", label: "3.5g", price: 30.0, },
        ],
   },
   {
@@ -178,7 +179,7 @@ const PRODUCTS = [
     color: "#4a4a55",
     description: "smoke.",
     variants: [
-      { id: "10000", label: "Gummies", price: 15.0, default: true },
+      { id: "10000", label: "1g", price: 15.0, default: true },
        ],
   },
   {
@@ -257,8 +258,8 @@ const PRODUCTS = [
     color: "#4a4a55",
     description: "Pils & Tabs",
     variants: [
-      { id: "10000", label: " 1", price: 10.0, default: true },
-        { id: "10000", label: "15 pieces", price: 100.0, default: true },
+      { id: "10000", label: " 1", price: 10.0,  },
+        { id: "16000", label: "15 pieces", price: 100.0, },
        ],
   },
 
@@ -284,7 +285,7 @@ const PRODUCTS = [
     price: 50.0,
     compareAt: 56.0,
     rating: { value: 4.7, count: 118 },
-    image: "images/adderal.jpg",
+    image: "images/adderal.jpeg",
     emoji: "🔋",
     color: "#4a4a55",
     description: "Pils & Tabs",
@@ -324,7 +325,7 @@ const PRODUCTS = [
     description: "Pils & Tabs",
     variants: [
     
-        { id: "1300", label: "2mg 1 ieces", price: 5.0,},
+        { id: "1390", label: "2mg 1 ieces", price: 5.0,},
        ],
   },
   {
@@ -340,7 +341,7 @@ const PRODUCTS = [
     description: "Pils & Tabs",
     variants: [
     
-        { id: "1300", label: "2mg 1 ieces", price: 5.0,},
+        { id: "1350", label: "2mg 1 ieces", price: 5.0,},
        ],
   },
 
@@ -357,7 +358,7 @@ const PRODUCTS = [
     description: "smoke",
     variants: [
     
-        { id: "1300", label: "1 ieces", price: 15.0,},
+        { id: "1215", label: "1 ieces", price: 15.0,},
        ],
   },
 
@@ -375,7 +376,7 @@ const PRODUCTS = [
     variants: [
     
         { id: "1300", label: "1g", price: 15.0,},
-         { id: "1300", label: "3.5g", price: 50.0,},
+         { id: "1400", label: "3.5g", price: 50.0,},
        ],
   },
 ];
