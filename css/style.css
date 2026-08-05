@@ -264,7 +264,7 @@ nav.main-nav a:not(.cart-link):hover::after {
   padding: clamp(56px, 10vw, 100px) 24px;
   text-align: center;
 
-  background: linear-gradient(rgba(16, 17, 20, 0.45), rgba(16, 17, 20, 0.55)), url("../images/rttdd.jpg");
+  background-image: url("../images/rttdd.jpeg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
