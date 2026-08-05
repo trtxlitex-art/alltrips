@@ -10,9 +10,54 @@
 // starting selection. `price`/`compareAt` on the product itself are only
 // used as the "from" price shown on the product card.
 const PRODUCTS = [
+ 
+    {
+    id: "Geekbar",
+    name: " geek bar ",
+    category: "Smoke",
+    price: 25.0,
+    compareAt: 30.0,
+    rating: { value: 5.0, count: 96 },
+    image: "images/geekbar.jpeg",
+    
+    color: "#2b2f36",
+     description:" smoke",
+     variants: [
+      
+      { id: "40l", label: " Banana Taffy Freeze", price: 25.0, default: true },
+      { id: "402", label: "  Blue Rancher", price: 25.0,},
+       { id: "403", label: "  Miami Mint", price: 25.0,},
+        { id: "404", label: "  Sour Apple Ice", price: 25.0,},
+         { id: "405", label: "  Strawberry B-Pop", price: 25.0,},
+     
+    ],
+  },
+
   {
-    id: "Nic Vapes",
-    name: " geek bar - elfbar - lost Mary",
+    id: "Elbar",
+    name: " elbar ",
+    category: "Smoke",
+    price: 25.0,
+    compareAt: 30.0,
+    rating: { value: 5.0, count: 96 },
+    image: "images/elbar.jpeg",
+    
+    color: "#2b2f36",
+    
+   description:" smoke",
+     variants: [
+      
+      { id: "41l", label: " Watermelon Ice", price: 25.0, default: true },
+      { id: "422", label: " Kiwi Passionfruit Guava", price: 25.0,},
+       { id: "423", label: "  Blueberry Sour Raspberry", price: 25.0,},
+        { id: "424", label: "  Apple Peach", price: 25.0,},
+         { id: "425", label: " Strawberry Kiwi", price: 25.0,},
+     
+    ],
+  },
+   {
+    id: "Lostmary",
+    name: " lost mary ",
     category: "Smoke",
     price: 25.0,
     compareAt: 30.0,
@@ -20,9 +65,57 @@ const PRODUCTS = [
     image: "images/lostmary.jpg",
     
     color: "#2b2f36",
+     description:" smoke",
      variants: [
       
-      { id: "40l", label: "lost-mary flavor", price: 25.0, default: true },
+      { id: "40l", label: " Kiwi Passion Fruit Guava", price: 25.0, default: true },
+      { id: "402", label: " Blueberry Sour Raspberry", price: 25.0,},
+       { id: "403", label: "  Triple Mango", price: 25.0,},
+        { id: "404", label: "  Watermelon Ice", price: 25.0,},
+         { id: "405", label: "Mad Blue", price: 25.0,},
+     
+    ],
+  },
+
+   {
+    id: "Muha Meds 2g",
+    name: " muha meds 2g ",
+    category: "Smoke",
+    price: 30.0,
+    compareAt: 30.0,
+    rating: { value: 5.0, count: 96 },
+    image: "images/muhameds.jpeg",
+    
+    color: "#2b2f36",
+    description:" smoke",
+     variants: [
+      
+      { id: "40l", label: " Blue Slushie (Hybrid)", price: 25.0, default: true },
+      { id: "402", label: " Green Apple Elixir (Hybrid)", price: 25.0,},
+       { id: "403", label: "  Grand Daddy Purp (Indica)", price: 25.0,},
+        { id: "404", label: "  Pineapple Express (Sativa)", price: 25.0,},
+         { id: "405", label: " Sweet Dreams OG (Indica)", price: 25.0,},
+     
+    ],
+  },
+    {
+    id: "Cali clear 2g",
+    name: " Cali clear 2g ",
+    category: "Smoke",
+    price: 30.0,
+    compareAt: 30.0,
+    rating: { value: 5.0, count: 96 },
+    image: "images/caliclear.jpeg",
+    
+    color: "#2b2f36",
+    description:"cali clear smoke",
+     variants: [
+      
+      { id: "40l", label: " Fruity & Tropical", price: 30.0, default: true },
+      { id: "402", label: " Sweet & Dessert-Inspired: Ice", price: 30.0,},
+       { id: "403", label: " Candy & Beverage", price: 30.0,},
+        { id: "404", label: "  Classic Cannabis Strains", price: 30.0,},
+       
      
     ],
   },
@@ -164,7 +257,7 @@ const PRODUCTS = [
     description: "Smoke.",
     variants: [
       { id: "1450", label: "1g", price: 10.0, default: true },
-       { id: "1460", label: "3.5g", price: 50.0, },
+       { id: "1460", label: "3.5g", price: 30.0, },
        ],
   },
   {
@@ -190,7 +283,7 @@ const PRODUCTS = [
     price: 15.0,
     compareAt: 17.0,
     rating: { value: 4.7, count: 118 },
-    image: "images/gummies.webp",
+    image: "images/skywalk.jpeg",
     emoji: "🔋",
     color: "#4a4a55",
     description: "Smoke",
